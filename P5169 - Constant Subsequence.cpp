@@ -30,11 +30,11 @@ bool find_ans(ll mid, const vector<int> &n, const vector<int> &p){
    int i = 0, j = 0;
 
    ll sum = 0;
-   while(i < x or j < y){
-     if(i < x and sum + p[i] <= mid){
+   while(i < y or j < x){
+     if(i < y and sum + p[i] <= mid){
         sum += p[i++];
      }
-     else if(j < y){
+     else if(j < x){
         sum += n[j++];
         if(sum < 0) sum = 0;
      }
@@ -53,7 +53,7 @@ void solution(){
      else pos.push_back(x);
    }
 
-   if(!pos.size()){
+   if(pos.empty()){
       cout << 0 << nn;
       return;
    }
