@@ -29,35 +29,31 @@ const int N = 62;
 
 int n;
 string s;
-int dp[N][N][N];
+int dp[N][120];
 int find_ans(int i, int cnt0, int cnt1){
    if(i == n){
      return 1;
    }
    
-   if(dp[i][cnt0][cnt1] != -1){
-      return dp[i][cnt0][cnt1];
-   }
+   if(dp[i][cnt0 + cnt1] != -1)return dp[i][cnt0 + cnt1];
 
    int ans = 0;
    if(s[i] == '1'){
      int x = cnt0, y = cnt1 + 1;
      if(x == y){
-        ans += find_ans(i + 1, cnt0, cnt1 + 1);
-        ans += find_ans(i + 1, cnt0, cnt1 + 1);
+        ans += find_ans(i + 1, cnt0, cnt1 + 1) + find_ans(i + 1, cnt0, cnt1 + 1);
      }
-     else ans += find_ans(i + 1, cnt0, cnt1 + 1);
+     else  ans += find_ans(i + 1, cnt0, cnt1 + 1);
    }
    else{
      int x = cnt0 + 1, y = cnt1;
      if(x == y){
-         ans += find_ans(i + 1, cnt0 + 1, cnt1);
-         ans += find_ans(i + 1, cnt0 + 1, cnt1);
+         ans += find_ans(i + 1, cnt0 + 1, cnt1) + find_ans(i + 1, cnt0 + 1, cnt1);
      }
      else ans += find_ans(i + 1, cnt0 + 1, cnt1);
    }
 
-   return dp[i][cnt0][cnt1] = ans;
+   return dp[i][cnt0 + cnt1] = ans;
 }
 void solution(){
    cin >> n;
